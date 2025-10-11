@@ -1,22 +1,25 @@
 // src/pages/Login.jsx
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Input, Button, message } from "antd";
+import api from "../api/axios";
 
 const Login = () => {
   const navigate = useNavigate();
 
   const onFinish = async (values) => {
     try {
-      const res = await axios.post("http://localhost:8000/api/auth/login", values);
+      const res = await api.post("/auth/login", values);
       const token = res.data.access_token;
 
       // Store JWT in localStorage
       localStorage.setItem("access_token", token);
+      // Reset any cached interview state
+      localStorage.removeItem("swipe_interview_state");
 
       message.success("Login successful!");
-      navigate("/"); // go to Interviewee page
+      // Force a page reload to ensure clean state
+      window.location.href = "/";
     } catch (err) {
       console.log(err);
       message.error(err.response?.data?.detail || "Login failed");
