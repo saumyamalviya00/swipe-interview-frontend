@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:8000/api",
+  baseURL: "https://swipe-backend-966027058831.asia-south1.run.app/api",
 });
 
 // Add Authorization header automatically
