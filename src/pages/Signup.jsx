@@ -9,7 +9,7 @@ const Signup = () => {
 
   const onFinish = async (values) => {
     try {
-      const res = await axios.post("http://localhost:8000/api/auth/signup", values);
+      const res = await axios.post("https://swipe-backend-966027058831.asia-south1.run.app/api/auth/signup", values);
       message.success("Signup successful! Please login.");
       navigate("/login");
     } catch (err) {
